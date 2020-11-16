@@ -1,0 +1,12 @@
+{% extends "tarefas/base.html" %}
+{% block conteudo %}
+<div class="card">
+  <div class="card-header">
+    Dados do tarefa
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Título: {{tarefa.titulo}}</h5>
+    <h6 class="card-title">Descrição: {{tarefa.descricao}}</h6>
+  </div>
+</div>
+{% endblock conteudo %}

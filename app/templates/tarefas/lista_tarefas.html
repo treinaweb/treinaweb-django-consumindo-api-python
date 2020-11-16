@@ -1,0 +1,25 @@
+{% extends "tarefas/base.html" %}
+{% block conteudo %}
+<table class="table">
+  <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+    </tr>
+  </thead>
+    {% for i in tarefas %}
+    <tr>
+        <td><a href="{%url 'listar_tarefa_id' i.id%}">{{i.titulo}}</a></td>
+        <td>{{i.descricao}}</td>
+        <td>
+            <a href="{% url 'editar_tarefa' i.id %}">Editar</a> |
+            <a href="{% url 'remover_tarefa' i.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'inserir_tarefa' %}"><button class="btn btn-primary">Cadastrar Tarefa</button></a>
+
+{% endblock conteudo %}

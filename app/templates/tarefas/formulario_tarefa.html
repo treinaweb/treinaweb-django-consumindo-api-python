@@ -1,0 +1,19 @@
+{% extends "tarefas/base.html" %}
+{% block conteudo %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.titulo.errors }}
+        <label>Título:</label>
+        {{ form.titulo }}
+    </div>
+    <div class="form-group">
+        {{ form.descricao.errors }}
+        <label>Descrição:</label>
+        {{ form.descricao }}
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Cadastrar">
+    </div>
+</form>
+{% endblock conteudo %}
