@@ -9,7 +9,8 @@ def listar_tarefas():
     return tarefas
 
 def listar_tarefa_id(id):
-    tarefa = Tarefa.objects.get(id=id)
+    response = requests.get(f"http://localhost:3002/api/tarefas-django?id={id}")
+    tarefa = json.loads(response.content)
     return tarefa
 
 def remover_tarefa(tarefa):
