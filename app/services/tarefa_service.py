@@ -2,6 +2,7 @@ import requests
 import json
 
 from ..models import *
+from ..encoder import MeuEncoder
 
 def listar_tarefas():
     response = requests.get("http://localhost:3002/api/tarefas-django")
@@ -17,7 +18,8 @@ def remover_tarefa(id):
     requests.delete(f"http://localhost:3002/api/tarefas-django?id={id}")
 
 def cadastrar_tarefa(tarefa):
-    Tarefa.objects.create(titulo=tarefa.titulo, descricao=tarefa.descricao)
+    data = json.dumps(tarefa, cls=MeuEncoder)
+    requests.post("http://localhost:3002/api/tarefas-django", data=data)
 
 def editar_tarefa(tarefa, tarefa_novo):
     tarefa.titulo = tarefa_novo.titulo

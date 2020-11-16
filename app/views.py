@@ -14,8 +14,8 @@ def inserir_tarefa(request):
         if form.is_valid():
             titulo = form.cleaned_data["titulo"]
             descricao = form.cleaned_data["descricao"]
-            tarefa_novo = tarefa.Tarefa(titulo=titulo, descricao=descricao)
-            tarefa_service.cadastrar_tarefa(tarefa_novo)
+            tarefa_nova = tarefa.Tarefa(titulo=titulo, descricao=descricao)
+            tarefa_service.cadastrar_tarefa(tarefa_nova)
             return redirect('listar_tarefas')
     else:
         form = TarefaForm()
