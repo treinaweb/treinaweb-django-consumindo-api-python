@@ -1,7 +1,11 @@
+import requests
+import json
+
 from ..models import *
 
 def listar_tarefas():
-    tarefas = Tarefa.objects.all()
+    response = requests.get("http://localhost:3002/api/tarefas-django")
+    tarefas = json.loads(response.content)
     return tarefas
 
 def listar_tarefa_id(id):
