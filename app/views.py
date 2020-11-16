@@ -40,7 +40,7 @@ def editar_tarefa(request, id):
 def remover_tarefa(request, id):
     tarefa = tarefa_service.listar_tarefa_id(id)
     if request.method == "POST":
-        tarefa_service.remover_tarefa(tarefa)
+        tarefa_service.remover_tarefa(id)
         return redirect('listar_tarefas')
 
     return render(request, 'tarefas/confirma_exclusao.html', {'tarefa': tarefa})

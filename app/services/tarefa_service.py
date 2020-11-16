@@ -13,8 +13,8 @@ def listar_tarefa_id(id):
     tarefa = json.loads(response.content)
     return tarefa
 
-def remover_tarefa(tarefa):
-    tarefa.delete()
+def remover_tarefa(id):
+    requests.delete(f"http://localhost:3002/api/tarefas-django?id={id}")
 
 def cadastrar_tarefa(tarefa):
     Tarefa.objects.create(titulo=tarefa.titulo, descricao=tarefa.descricao)
