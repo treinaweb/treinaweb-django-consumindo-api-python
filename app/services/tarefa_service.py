@@ -21,8 +21,7 @@ def cadastrar_tarefa(tarefa):
     data = json.dumps(tarefa, cls=MeuEncoder)
     requests.post("http://localhost:3002/api/tarefas-django", data=data)
 
-def editar_tarefa(tarefa, tarefa_novo):
-    tarefa.titulo = tarefa_novo.titulo
-    tarefa.descricao = tarefa_novo.descricao
-    tarefa.save(force_update=True)
+def editar_tarefa(tarefa_editada, id):
+    data = json.dumps(tarefa_editada, cls=MeuEncoder)
+    requests.put(f"http://localhost:3002/api/tarefas-django?id={id}", data=data)
 

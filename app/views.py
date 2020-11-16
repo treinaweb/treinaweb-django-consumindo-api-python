@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import TarefaForm
 from .entidades import tarefa
 from .services import tarefa_service
+from .models import Tarefa
 # Create your views here.
 
 def listar_tarefas(request):
@@ -27,12 +28,13 @@ def listar_tarefa_id(request, id):
 
 def editar_tarefa(request, id):
     tarefa_busca = tarefa_service.listar_tarefa_id(id)
-    form = TarefaForm(request.POST or None, instance=tarefa_busca)
+    tarefa_model = Tarefa(titulo=tarefa_busca['titulo'], descricao=tarefa_busca['descricao'])
+    form = TarefaForm(request.POST or None, instance=tarefa_model)
     if form.is_valid():
         titulo = form.cleaned_data["titulo"]
         descricao = form.cleaned_data["descricao"]
-        tarefa_novo = tarefa.Tarefa(titulo=titulo, descricao=descricao)
-        tarefa_service.editar_tarefa(tarefa_busca, tarefa_novo)
+        tarefa_editada = tarefa.Tarefa(titulo=titulo, descricao=descricao)
+        tarefa_service.editar_tarefa(tarefa_editada, id)
         return redirect('listar_tarefas')
 
     return render(request, 'tarefas/formulario_tarefa.html', {'form': form, 'tarefa': tarefa})
